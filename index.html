@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Closet Paty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1a1a1a;
+    --ink-soft: #555;
+    --line: #f3dde6;
+    --rose: #ffd6e3;
+    --rose-deep: #ff5fa2;
+    --cream: #fff5f9;
+    --accent: #e91e7a;
+    --accent-hover: #c1185f;
+    --price: #1a1a1a;
+    --discount: #c7414a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Jost', sans-serif;
+    color: var(--ink);
+    background: var(--bg);
+    font-weight: 300;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+
+  /* TOPO – cupom rolante */
+  .promo-bar {
+    background: var(--ink);
+    color: #fff;
+    overflow: hidden;
+    white-space: nowrap;
+    padding: 9px 0;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .promo-track {
+    display: inline-block;
+    animation: scroll 30s linear infinite;
+  }
+  .promo-track span {
+    margin: 0 28px;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* HEADER */
+  header {
+    border-bottom: 1px solid var(--line);
+    background: var(--bg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-top {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 22px 30px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 30px;
+  }
+  .header-icons-left {
+    display: flex;
+    gap: 22px;
+    align-items: center;
+  }
+  .header-icons-right {
+    display: flex;
+    gap: 22px;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--ink);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: inherit;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+  }
+  .icon-btn svg { width: 20px; height: 20px; stroke-width: 1.3; }
+  .logo {
+    text-align: center;
+    display: inline-block;
+  }
+  .logo img {
+    height: 90px;
+    width: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .cart-count {
+    background: var(--ink);
+    color: #fff;
+    border-radius: 50%;
+    width: 18px;
+    height: 18px;
+    font-size: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -4px;
+  }
+
+  /* NAV */
+  nav {
+    border-top: 1px solid var(--line);
+  }
+  .nav-list {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 14px 30px;
+    display: flex;
+    justify-content: center;
+    gap: 38px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .nav-list a {
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 400;
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.2s;
+  }
+  .nav-list a:hover { color: var(--accent); }
+  .nav-list .highlight {
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 100%);
+    padding: 90px 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(233,30,122,0.15), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -100px;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(255,214,227,0.7), transparent 70%);
+    border-radius: 50%;
+  }
+  .hero-content {
+    position: relative;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(40px, 6vw, 68px);
+    font-weight: 400;
+    line-height: 1.05;
+    margin-bottom: 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero h1 em {
+    font-family: 'Dancing Script', cursive;
+    font-style: normal;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .hero p {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    letter-spacing: 0.02em;
+  }
+  .btn {
+    display: inline-block;
+    padding: 15px 48px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-family: inherit;
+  }
+  .btn:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+  }
+
+  /* BENEFÍCIOS */
+  .benefits {
+    border-bottom: 1px solid var(--line);
+    border-top: 1px solid var(--line);
+  }
+  .benefits-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 36px 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 30px;
+    text-align: center;
+  }
+  .benefit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .benefit svg {
+    width: 32px;
+    height: 32px;
+    stroke-width: 1.2;
+    color: var(--accent);
+    margin-bottom: 4px;
+  }
+  .benefit h3 {
+    font-size: 13px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .benefit p {
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* BANNERS DE CATEGORIA */
+  .category-grid {
+    max-width: 1300px;
+    margin: 70px auto;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 18px;
+  }
+  .cat-card {
+    aspect-ratio: 3/4;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .cat-card .cat-img {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.4) 100%), var(--cat-color);
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding: 26px;
+    transition: transform 0.6s;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    letter-spacing: 0.08em;
+    font-weight: 500;
+  }
+  .cat-card:hover .cat-img { transform: scale(1.05); }
+  .cat-card:nth-child(1) .cat-img { --cat-color: linear-gradient(135deg, #d4b896, #a07b5e); }
+  .cat-card:nth-child(2) .cat-img { --cat-color: linear-gradient(135deg, #e8c4c4, #b87878); }
+  .cat-card:nth-child(3) .cat-img { --cat-color: linear-gradient(135deg, #c9b8a8, #6b5d52); }
+  .cat-card:nth-child(4) .cat-img { --cat-color: linear-gradient(135deg, #f4d8d8, #d99a9a); }
+  .cat-card:nth-child(5) .cat-img { --cat-color: linear-gradient(135deg, #2c2c2c, #555); }
+
+  /* SEÇÃO TÍTULO */
+  .section-title {
+    text-align: center;
+    margin: 70px auto 40px;
+    padding: 0 30px;
+  }
+  .section-title h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 48px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+  }
+  .section-title h2::after {
+    content: ' ♡';
+    color: var(--accent);
+  }
+  .section-title .sub {
+    display: block;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* PRODUTOS */
+  .products {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 30px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 28px 18px;
+  }
+  .product {
+    cursor: pointer;
+  }
+  .product-img {
+    aspect-ratio: 3/4;
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .product-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .product:hover .product-photo { transform: scale(1.04); }
+  .badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: var(--ink);
+    color: #fff;
+    font-size: 10px;
+    padding: 4px 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .badge.sale {
+    background: var(--discount);
+  }
+  .quick-buy {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(255,255,255,0.95);
+    color: var(--ink);
+    text-align: center;
+    padding: 12px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transform: translateY(100%);
+    transition: transform 0.3s;
+  }
+  .product:hover .quick-buy { transform: translateY(0); }
+  .product-name {
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+  .product-colors {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 6px;
+  }
+  .color-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    border: 1px solid var(--line);
+  }
+  .product-price {
+    font-size: 13px;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .product-price .old {
+    text-decoration: line-through;
+    color: var(--ink-soft);
+    font-weight: 300;
+    margin-right: 6px;
+    font-size: 12px;
+  }
+  .product-price .discount {
+    color: var(--discount);
+    font-size: 11px;
+    margin-left: 6px;
+  }
+  .product-installments {
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
+
+  /* INSTAGRAM */
+  .instagram {
+    margin: 90px auto 60px;
+    text-align: center;
+    padding: 0 30px;
+  }
+  .instagram h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 42px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .instagram a {
+    color: var(--accent);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+  }
+  .insta-grid {
+    max-width: 1300px;
+    margin: 30px auto 0;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 4px;
+  }
+  .insta-item {
+    aspect-ratio: 1;
+    background: var(--cream);
+  }
+  .insta-item:nth-child(1) { background: linear-gradient(135deg, #f4d8d8, #d99a9a); }
+  .insta-item:nth-child(2) { background: linear-gradient(135deg, #d4b896, #a07b5e); }
+  .insta-item:nth-child(3) { background: linear-gradient(135deg, #c9b8a8, #6b5d52); }
+  .insta-item:nth-child(4) { background: linear-gradient(135deg, #e8c4c4, #b87878); }
+  .insta-item:nth-child(5) { background: linear-gradient(135deg, #faf6f2, #d4b896); }
+  .insta-item:nth-child(6) { background: linear-gradient(135deg, #2c2c2c, #555); }
+
+  /* NEWSLETTER */
+  .newsletter {
+    background: var(--cream);
+    padding: 60px 30px;
+    text-align: center;
+  }
+  .newsletter-inner { max-width: 540px; margin: 0 auto; }
+  .newsletter h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 44px;
+    font-weight: 600;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .newsletter p {
+    color: var(--ink-soft);
+    font-size: 14px;
+    margin-bottom: 24px;
+  }
+  .newsletter-form {
+    display: flex;
+    gap: 0;
+    max-width: 440px;
+    margin: 0 auto;
+    border: 1px solid var(--ink);
+  }
+  .newsletter-form input {
+    flex: 1;
+    padding: 14px 18px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  .newsletter-form button {
+    background: var(--ink);
+    color: #fff;
+    border: none;
+    padding: 0 28px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--accent); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    color: #fff;
+    padding: 60px 30px 30px;
+  }
+  .footer-grid {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+  }
+  .footer-col h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+  .footer-col p, .footer-col a {
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+    display: block;
+    transition: color 0.2s;
+  }
+  .footer-col a:hover { color: var(--rose); }
+  .footer-brand .logo-footer {
+    display: inline-block;
+    background: #fff;
+    padding: 12px 18px;
+    border-radius: 6px;
+    margin-bottom: 18px;
+  }
+  .footer-brand .logo-footer img {
+    height: 70px;
+    width: auto;
+    display: block;
+  }
+  .social-icons {
+    display: flex;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .social-icons a {
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    transition: all 0.3s;
+  }
+  .social-icons a:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .social-icons svg { width: 16px; height: 16px; }
+  .footer-bottom {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.5);
+  }
+  .payment-icons {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .payment-icons span {
+    background: rgba(255,255,255,0.1);
+    padding: 4px 10px;
+    border-radius: 3px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+  }
+
+  /* WhatsApp flutuante */
+  .whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 58px;
+    height: 58px;
+    background: #25d366;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,211,102,0.4);
+    z-index: 99;
+    transition: transform 0.3s;
+  }
+  .whatsapp-float:hover { transform: scale(1.1); }
+  .whatsapp-float svg { width: 30px; height: 30px; color: #fff; }
+
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .header-top { grid-template-columns: auto 1fr auto; gap: 12px; padding: 16px 18px; }
+    .header-icons-left .label, .header-icons-right .label { display: none; }
+    .logo img { height: 60px; }
+    .nav-list { gap: 18px; padding: 12px 18px; }
+    .nav-list a { font-size: 11px; }
+    .hero { padding: 60px 20px; }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+    .products { grid-template-columns: repeat(2, 1fr); gap: 18px 10px; }
+    .section-title h2 { font-size: 36px; }
+    .newsletter h2, .instagram h2 { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Barra promocional -->
+<div class="promo-bar">
+  <div class="promo-track">
+    <span>♡ 5% OFF NA SUA PRIMEIRA COMPRA · CUPOM: BEMVINDA5</span>
+    <span>♡ FRETE GRÁTIS ACIMA DE R$300</span>
+    <span>♡ PARCELE EM ATÉ 12X NO CARTÃO</span>
+    <span>♡ 5% OFF NA SUA PRIMEIRA COMPRA · CUPOM: BEMVINDA5</span>
+    <span>♡ FRETE GRÁTIS ACIMA DE R$300</span>
+    <span>♡ PARCELE EM ATÉ 12X NO CARTÃO</span>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="header-top">
+    <div class="header-icons-left">
+      <button class="icon-btn" aria-label="Menu">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <button class="icon-btn" aria-label="Buscar">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
+        <span class="label">BUSCAR</span>
+      </button>
+    </div>
+
+    <a href="#" class="logo">
+      <img src="logo-closet-paty.png" alt="Closet Paty">
+    </a>
+
+    <div class="header-icons-right">
+      <a class="icon-btn" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+        <span class="label">CONTA</span>
+      </a>
+      <a class="icon-btn" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
+      </a>
+      <a class="icon-btn" href="#">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+        <span class="cart-count">0</span>
+      </a>
+    </div>
+  </div>
+
+  <nav>
+    <ul class="nav-list">
+      <li><a href="#">Início</a></li>
+      <li><a href="#">Acessórios</a></li>
+      <li><a href="#">Looks Completos</a></li>
+      <li><a href="#">Peças de Cima</a></li>
+      <li><a href="#">Peças de Baixo</a></li>
+      <li><a href="#">Sapatos</a></li>
+      <li><a href="#" class="highlight">Nova Coleção</a></li>
+      <li><a href="#">Moda Praia</a></li>
+    </ul>
+  </nav>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>O seu novo<br><em>look favorito</em><br>está aqui</h1>
+    <p>Descubra a coleção que vai compor seu closet dos sonhos</p>
+    <a href="#destaques" class="btn">Ver Coleção</a>
+  </div>
+</section>
+
+<!-- Benefícios -->
+<section class="benefits">
+  <div class="benefits-grid">
+    <div class="benefit">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/></svg>
+      <h3>Envios para todo Brasil</h3>
+      <p>Receba aonde estiver</p>
+    </div>
+    <div class="benefit">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/></svg>
+      <h3>Parcele em até 12x</h3>
+      <p>Nos cartões de crédito</p>
+    </div>
+    <div class="benefit">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/></svg>
+      <h3>5% de Desconto</h3>
+      <p>Cupom: BEMVINDA5</p>
+    </div>
+    <div class="benefit">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
+      <h3>Suporte Paty</h3>
+      <p>Fale conosco no WhatsApp</p>
+    </div>
+  </div>
+</section>
+
+<!-- Banners de categoria -->
+<div class="category-grid">
+  <div class="cat-card"><div class="cat-img">Looks Completos</div></div>
+  <div class="cat-card"><div class="cat-img">Peças de Cima</div></div>
+  <div class="cat-card"><div class="cat-img">Peças de Baixo</div></div>
+  <div class="cat-card"><div class="cat-img">Moda Praia</div></div>
+  <div class="cat-card"><div class="cat-img">Sapatos</div></div>
+</div>
+
+<!-- Destaques -->
+<div class="section-title" id="destaques">
+  <span class="sub">Selecionados para você</span>
+  <h2>Destaques</h2>
+</div>
+
+<div class="products">
+  <!-- Produto 1 -->
+  <div class="product">
+    <div class="product-img">
+      <span class="badge">Novo</span>
+      <img class="product-photo" src="imagens/produtos/conjunto-canelado-3d.jpg" alt="Conjunto Canelado 3D">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Conjunto Canelado 3D</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#faf6f2"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+      <span class="color-dot" style="background:#888"></span>
+    </div>
+    <div class="product-price">R$ 195,00</div>
+    <div class="product-installments">12x de R$ 20,06 sem juros</div>
+  </div>
+
+  <!-- Produto 2 -->
+  <div class="product">
+    <div class="product-img">
+      <img class="product-photo" src="imagens/produtos/macacao-modal-ziper.jpg" alt="Macacão Modal Zíper">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Macacão Modal Zíper</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#888"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+    </div>
+    <div class="product-price">R$ 160,00</div>
+    <div class="product-installments">12x de R$ 16,46 sem juros</div>
+  </div>
+
+  <!-- Produto 3 -->
+  <div class="product">
+    <div class="product-img">
+      <span class="badge">Novo</span>
+      <img class="product-photo" src="imagens/produtos/body-luci.jpg" alt="Body Luci">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Body Luci</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#f4d8d8"></span>
+      <span class="color-dot" style="background:#888"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+      <span class="color-dot" style="background:#d4b896"></span>
+    </div>
+    <div class="product-price">R$ 70,00</div>
+    <div class="product-installments">12x de R$ 7,20 sem juros</div>
+  </div>
+
+  <!-- Produto 4 -->
+  <div class="product">
+    <div class="product-img">
+      <img class="product-photo" src="imagens/produtos/body-fernanda.jpg" alt="Body Fernanda">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Body Fernanda</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#faf6f2"></span>
+      <span class="color-dot" style="background:#888"></span>
+      <span class="color-dot" style="background:#5e1f2e"></span>
+    </div>
+    <div class="product-price">R$ 70,00</div>
+    <div class="product-installments">12x de R$ 7,20 sem juros</div>
+  </div>
+
+  <!-- Produto 5 -->
+  <div class="product">
+    <div class="product-img">
+      <img class="product-photo" src="imagens/produtos/calca-modal-duo.jpg" alt="Calça Modal Duo">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Calça Modal Duo</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#888"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+      <span class="color-dot" style="background:#f4d8d8"></span>
+    </div>
+    <div class="product-price">R$ 95,00</div>
+    <div class="product-installments">12x de R$ 9,77 sem juros</div>
+  </div>
+
+  <!-- Produto 6 -->
+  <div class="product">
+    <div class="product-img">
+      <span class="badge">Novo</span>
+      <img class="product-photo" src="imagens/produtos/calca-wide-resinada.jpg" alt="Calça Wide Resinada">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Calça Wide Resinada</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#4a6b8a"></span>
+    </div>
+    <div class="product-price">R$ 195,00</div>
+    <div class="product-installments">12x de R$ 20,06 sem juros</div>
+  </div>
+
+  <!-- Produto 7 -->
+  <div class="product">
+    <div class="product-img">
+      <img class="product-photo" src="imagens/produtos/macaquinho-pink-glitz.jpg" alt="Macaquinho Pink Glitz">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Macaquinho Pink Glitz</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#ff6b9d"></span>
+    </div>
+    <div class="product-price">R$ 250,00</div>
+    <div class="product-installments">12x de R$ 25,72 sem juros</div>
+  </div>
+
+  <!-- Produto 8 -->
+  <div class="product">
+    <div class="product-img">
+      <img class="product-photo" src="imagens/produtos/conjunto-duo-jeans.jpg" alt="Conjunto Duo Jeans">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Conjunto Duo Jeans</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#34516e"></span>
+    </div>
+    <div class="product-price">R$ 250,00</div>
+    <div class="product-installments">12x de R$ 25,72 sem juros</div>
+  </div>
+</div>
+
+<!-- Promoções -->
+<div class="section-title">
+  <span class="sub">Não perca</span>
+  <h2>Promoções</h2>
+</div>
+
+<div class="products">
+  <div class="product">
+    <div class="product-img">
+      <span class="badge sale">-13%</span>
+      <img class="product-photo" src="imagens/produtos/vestido-ingrid.jpg" alt="Vestido Ingrid">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Vestido Ingrid</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#c2185b"></span>
+      <span class="color-dot" style="background:#ff6b9d"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+      <span class="color-dot" style="background:#fff;border:1px solid #ddd"></span>
+    </div>
+    <div class="product-price">
+      <span class="old">R$ 155,00</span>R$ 135,00 <span class="discount">-13%</span>
+    </div>
+    <div class="product-installments">12x de R$ 13,89 sem juros</div>
+  </div>
+
+  <div class="product">
+    <div class="product-img">
+      <span class="badge sale">-14%</span>
+      <img class="product-photo" src="imagens/produtos/vestido-medalha.jpg" alt="Vestido Medalha">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Vestido Medalha</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#1a1a1a"></span>
+      <span class="color-dot" style="background:#f4d8d8"></span>
+    </div>
+    <div class="product-price">
+      <span class="old">R$ 210,00</span>R$ 180,00 <span class="discount">-14%</span>
+    </div>
+    <div class="product-installments">12x de R$ 18,52 sem juros</div>
+  </div>
+
+  <div class="product">
+    <div class="product-img">
+      <span class="badge sale">-15%</span>
+      <img class="product-photo" src="imagens/produtos/vestido-suely.jpg" alt="Vestido Suely">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Vestido Suely</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#fff;border:1px solid #ddd"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+    </div>
+    <div class="product-price">
+      <span class="old">R$ 210,00</span>R$ 178,50 <span class="discount">-15%</span>
+    </div>
+    <div class="product-installments">12x de R$ 18,36 sem juros</div>
+  </div>
+
+  <div class="product">
+    <div class="product-img">
+      <span class="badge sale">-17%</span>
+      <img class="product-photo" src="imagens/produtos/vestido-mariah-modal.jpg" alt="Vestido Mariah Modal">
+      <div class="quick-buy">Comprar</div>
+    </div>
+    <h3 class="product-name">Vestido Mariah Modal</h3>
+    <div class="product-colors">
+      <span class="color-dot" style="background:#faf6f2"></span>
+      <span class="color-dot" style="background:#b8d4e3"></span>
+      <span class="color-dot" style="background:#1a1a1a"></span>
+    </div>
+    <div class="product-price">
+      <span class="old">R$ 145,00</span>R$ 120,00 <span class="discount">-17%</span>
+    </div>
+    <div class="product-installments">12x de R$ 12,34 sem juros</div>
+  </div>
+</div>
+
+<!-- Instagram -->
+<section class="instagram">
+  <h2>Siga-nos no Instagram</h2>
+  <a href="#">@closetpaty</a>
+  <div class="insta-grid">
+    <div class="insta-item"></div>
+    <div class="insta-item"></div>
+    <div class="insta-item"></div>
+    <div class="insta-item"></div>
+    <div class="insta-item"></div>
+    <div class="insta-item"></div>
+  </div>
+</section>
+
+<!-- Newsletter -->
+<section class="newsletter">
+  <div class="newsletter-inner">
+    <h2>Seja uma cliente VIP ♡</h2>
+    <p>Receba novidades, lançamentos e cupons exclusivos no seu e-mail</p>
+    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Obrigada por se inscrever!');">
+      <input type="email" placeholder="Seu melhor e-mail" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col footer-brand">
+      <div class="logo-footer"><img src="logo-closet-paty.png" alt="Closet Paty"></div>
+      <p>Peças selecionadas para mulheres que amam estilo, conforto e atitude. Seu closet dos sonhos começa aqui.</p>
+      <div class="social-icons">
+        <a href="#" aria-label="Instagram">
+          <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke-width="1.5"/><circle cx="12" cy="12" r="4" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        </a>
+        <a href="#" aria-label="WhatsApp">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.86 1h.01c4.39 0 7.95-3.57 7.95-7.95a7.9 7.9 0 00-2.4-5.63zm-5.55 12.23h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.49.65.66-2.42-.16-.25a6.61 6.61 0 0110.21-8.18 6.55 6.55 0 011.94 4.7c0 3.65-2.97 6.61-6.55 6.56z"/></svg>
+        </a>
+        <a href="#" aria-label="TikTok">
+          <svg fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-5.2 1.74 2.89 2.89 0 012.31-4.64 2.93 2.93 0 01.88.13V9.4a6.84 6.84 0 00-1-.05A6.33 6.33 0 005.8 20.1a6.34 6.34 0 0010.86-4.43v-7a8.16 8.16 0 004.77 1.52v-3.4a4.85 4.85 0 01-1.84-.1z"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Atendimento</h4>
+      <a href="#">Fale Conosco</a>
+      <a href="#">Trocas e Devoluções</a>
+      <a href="#">Formas de Pagamento</a>
+      <a href="#">Política de Frete</a>
+      <a href="#">Tabela de Medidas</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Categorias</h4>
+      <a href="#">Looks Completos</a>
+      <a href="#">Peças de Cima</a>
+      <a href="#">Peças de Baixo</a>
+      <a href="#">Sapatos</a>
+      <a href="#">Acessórios</a>
+      <a href="#">Moda Praia</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contato</h4>
+      <p>WhatsApp: (00) 00000-0000</p>
+      <p>contato@closetpaty.com.br</p>
+      <p>Seg a Sex – 9h às 18h</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span>© 2026 Closet Paty · Todos os direitos reservados</span>
+    <div class="payment-icons">
+      <span>PIX</span>
+      <span>VISA</span>
+      <span>MASTER</span>
+      <span>ELO</span>
+      <span>BOLETO</span>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp flutuante -->
+<a href="#" class="whatsapp-float" aria-label="WhatsApp">
+  <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.86 1h.01c4.39 0 7.95-3.57 7.95-7.95a7.9 7.9 0 00-2.4-5.63zm-5.55 12.23h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.49.65.66-2.42-.16-.25a6.61 6.61 0 0110.21-8.18 6.55 6.55 0 011.94 4.7c0 3.65-2.97 6.61-6.55 6.56z"/></svg>
+</a>
+
+</body>
+</html>
