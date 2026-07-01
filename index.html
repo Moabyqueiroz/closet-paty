@@ -629,7 +629,149 @@
     .products { grid-template-columns: repeat(2, 1fr); gap: 18px 10px; }
     .section-title h2 { font-size: 36px; }
     .newsletter h2, .instagram h2 { font-size: 34px; }
+    .quick-buy { position: static; transform: none; margin-top: 6px; }
+    .cart-drawer { width: 100%; }
   }
+
+  /* CARRINHO */
+  .quick-buy { cursor: pointer; }
+  .cart-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    z-index: 200;
+  }
+  .cart-overlay.open { opacity: 1; pointer-events: auto; }
+  .cart-drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 380px;
+    max-width: 90vw;
+    background: var(--bg);
+    box-shadow: -4px 0 24px rgba(0,0,0,0.15);
+    z-index: 201;
+    transform: translateX(100%);
+    transition: transform 0.3s;
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-drawer.open { transform: translateX(0); }
+  .cart-drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--line);
+  }
+  .cart-drawer-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+  }
+  .cart-close {
+    background: none;
+    border: none;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--ink);
+  }
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 12px 24px;
+  }
+  .cart-empty {
+    padding: 40px 24px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+  .cart-item {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .cart-item img {
+    width: 64px;
+    height: 80px;
+    object-fit: cover;
+  }
+  .cart-item-name {
+    font-size: 13px;
+    margin-bottom: 4px;
+  }
+  .cart-item-price {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .cart-item-qty {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+  }
+  .cart-item-qty button {
+    width: 22px;
+    height: 22px;
+    border: 1px solid var(--line);
+    background: none;
+    cursor: pointer;
+    font-size: 13px;
+    line-height: 1;
+  }
+  .cart-item-remove {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--ink-soft);
+    cursor: pointer;
+    align-self: start;
+  }
+  .cart-drawer-footer {
+    padding: 20px 24px 24px;
+    border-top: 1px solid var(--line);
+  }
+  .cart-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+  .cart-checkout-btn {
+    width: 100%;
+    text-align: center;
+  }
+  .cart-checkout-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+  .checkout-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 300;
+    text-align: center;
+    padding: 14px 20px;
+    font-size: 13px;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+  .checkout-banner-success { background: #2e7d32; }
+  .checkout-banner-error { background: var(--discount); }
+  .checkout-banner-info { background: var(--ink); }
 </style>
 </head>
 <body>
@@ -671,7 +813,7 @@
       <a class="icon-btn" href="#">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 20.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
       </a>
-      <a class="icon-btn" href="#">
+      <a class="icon-btn" href="#" id="cart-toggle">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
         <span class="cart-count">0</span>
       </a>
@@ -744,7 +886,7 @@
 
 <div class="products">
   <!-- Produto 1 -->
-  <div class="product">
+  <div class="product" data-id="conjunto-canelado-3d" data-price="195.00" data-name="Conjunto Canelado 3D">
     <div class="product-img">
       <span class="badge">Novo</span>
       <img class="product-photo" src="imagens/produtos/conjunto-canelado-3d.jpg" alt="Conjunto Canelado 3D">
@@ -761,7 +903,7 @@
   </div>
 
   <!-- Produto 2 -->
-  <div class="product">
+  <div class="product" data-id="macacao-modal-ziper" data-price="160.00" data-name="Macacão Modal Zíper">
     <div class="product-img">
       <img class="product-photo" src="imagens/produtos/macacao-modal-ziper.jpg" alt="Macacão Modal Zíper">
       <div class="quick-buy">Comprar</div>
@@ -776,7 +918,7 @@
   </div>
 
   <!-- Produto 3 -->
-  <div class="product">
+  <div class="product" data-id="body-luci" data-price="70.00" data-name="Body Luci">
     <div class="product-img">
       <span class="badge">Novo</span>
       <img class="product-photo" src="imagens/produtos/body-luci.jpg" alt="Body Luci">
@@ -794,7 +936,7 @@
   </div>
 
   <!-- Produto 4 -->
-  <div class="product">
+  <div class="product" data-id="body-fernanda" data-price="70.00" data-name="Body Fernanda">
     <div class="product-img">
       <img class="product-photo" src="imagens/produtos/body-fernanda.jpg" alt="Body Fernanda">
       <div class="quick-buy">Comprar</div>
@@ -810,7 +952,7 @@
   </div>
 
   <!-- Produto 5 -->
-  <div class="product">
+  <div class="product" data-id="calca-modal-duo" data-price="95.00" data-name="Calça Modal Duo">
     <div class="product-img">
       <img class="product-photo" src="imagens/produtos/calca-modal-duo.jpg" alt="Calça Modal Duo">
       <div class="quick-buy">Comprar</div>
@@ -826,7 +968,7 @@
   </div>
 
   <!-- Produto 6 -->
-  <div class="product">
+  <div class="product" data-id="calca-wide-resinada" data-price="195.00" data-name="Calça Wide Resinada">
     <div class="product-img">
       <span class="badge">Novo</span>
       <img class="product-photo" src="imagens/produtos/calca-wide-resinada.jpg" alt="Calça Wide Resinada">
@@ -841,7 +983,7 @@
   </div>
 
   <!-- Produto 7 -->
-  <div class="product">
+  <div class="product" data-id="macaquinho-pink-glitz" data-price="250.00" data-name="Macaquinho Pink Glitz">
     <div class="product-img">
       <img class="product-photo" src="imagens/produtos/macaquinho-pink-glitz.jpg" alt="Macaquinho Pink Glitz">
       <div class="quick-buy">Comprar</div>
@@ -855,7 +997,7 @@
   </div>
 
   <!-- Produto 8 -->
-  <div class="product">
+  <div class="product" data-id="conjunto-duo-jeans" data-price="250.00" data-name="Conjunto Duo Jeans">
     <div class="product-img">
       <img class="product-photo" src="imagens/produtos/conjunto-duo-jeans.jpg" alt="Conjunto Duo Jeans">
       <div class="quick-buy">Comprar</div>
@@ -876,7 +1018,7 @@
 </div>
 
 <div class="products">
-  <div class="product">
+  <div class="product" data-id="vestido-ingrid" data-price="135.00" data-name="Vestido Ingrid">
     <div class="product-img">
       <span class="badge sale">-13%</span>
       <img class="product-photo" src="imagens/produtos/vestido-ingrid.jpg" alt="Vestido Ingrid">
@@ -895,7 +1037,7 @@
     <div class="product-installments">12x de R$ 13,89 sem juros</div>
   </div>
 
-  <div class="product">
+  <div class="product" data-id="vestido-medalha" data-price="180.00" data-name="Vestido Medalha">
     <div class="product-img">
       <span class="badge sale">-14%</span>
       <img class="product-photo" src="imagens/produtos/vestido-medalha.jpg" alt="Vestido Medalha">
@@ -912,7 +1054,7 @@
     <div class="product-installments">12x de R$ 18,52 sem juros</div>
   </div>
 
-  <div class="product">
+  <div class="product" data-id="vestido-suely" data-price="178.50" data-name="Vestido Suely">
     <div class="product-img">
       <span class="badge sale">-15%</span>
       <img class="product-photo" src="imagens/produtos/vestido-suely.jpg" alt="Vestido Suely">
@@ -929,7 +1071,7 @@
     <div class="product-installments">12x de R$ 18,36 sem juros</div>
   </div>
 
-  <div class="product">
+  <div class="product" data-id="vestido-mariah-modal" data-price="120.00" data-name="Vestido Mariah Modal">
     <div class="product-img">
       <span class="badge sale">-17%</span>
       <img class="product-photo" src="imagens/produtos/vestido-mariah-modal.jpg" alt="Vestido Mariah Modal">
@@ -1037,5 +1179,24 @@
   <svg fill="currentColor" viewBox="0 0 24 24"><path d="M17.6 6.32A7.85 7.85 0 0012.05 4a7.94 7.94 0 00-6.88 11.93L4 20l4.18-1.1a7.93 7.93 0 003.86 1h.01c4.39 0 7.95-3.57 7.95-7.95a7.9 7.9 0 00-2.4-5.63zm-5.55 12.23h-.01a6.6 6.6 0 01-3.36-.92l-.24-.14-2.49.65.66-2.42-.16-.25a6.61 6.61 0 0110.21-8.18 6.55 6.55 0 011.94 4.7c0 3.65-2.97 6.61-6.55 6.56z"/></svg>
 </a>
 
+<!-- Carrinho -->
+<div id="cart-overlay" class="cart-overlay"></div>
+<aside id="cart-drawer" class="cart-drawer">
+  <div class="cart-drawer-header">
+    <h3>Sua Sacola</h3>
+    <button type="button" id="cart-close" class="cart-close" aria-label="Fechar">&times;</button>
+  </div>
+  <div id="cart-items" class="cart-items"></div>
+  <p id="cart-empty" class="cart-empty">Sua sacola está vazia.</p>
+  <div class="cart-drawer-footer">
+    <div class="cart-total-row">
+      <span>Total</span>
+      <span id="cart-total">R$ 0,00</span>
+    </div>
+    <button type="button" id="checkout-btn" class="btn cart-checkout-btn">Finalizar Compra</button>
+  </div>
+</aside>
+
+<script src="cart.js"></script>
 </body>
 </html>
