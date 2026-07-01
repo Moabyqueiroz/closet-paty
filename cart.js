@@ -150,7 +150,7 @@
   }
 
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.quick-buy').forEach(btn => {
+    document.querySelectorAll('.quick-buy, .add-to-cart-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
         e.stopPropagation();
         addToCart(btn.closest('.product'));

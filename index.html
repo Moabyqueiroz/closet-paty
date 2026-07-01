@@ -629,12 +629,30 @@
     .products { grid-template-columns: repeat(2, 1fr); gap: 18px 10px; }
     .section-title h2 { font-size: 36px; }
     .newsletter h2, .instagram h2 { font-size: 34px; }
-    .quick-buy { position: static; transform: none; margin-top: 6px; }
     .cart-drawer { width: 100%; }
   }
 
   /* CARRINHO */
   .quick-buy { cursor: pointer; }
+  .add-to-cart-btn {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    padding: 10px;
+    background: none;
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .add-to-cart-btn:hover {
+    background: var(--ink);
+    color: #fff;
+  }
   .cart-overlay {
     position: fixed;
     inset: 0;
@@ -900,6 +918,7 @@
     </div>
     <div class="product-price">R$ 195,00</div>
     <div class="product-installments">12x de R$ 20,06 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 2 -->
@@ -915,6 +934,7 @@
     </div>
     <div class="product-price">R$ 160,00</div>
     <div class="product-installments">12x de R$ 16,46 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 3 -->
@@ -933,6 +953,7 @@
     </div>
     <div class="product-price">R$ 70,00</div>
     <div class="product-installments">12x de R$ 7,20 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 4 -->
@@ -949,6 +970,7 @@
     </div>
     <div class="product-price">R$ 70,00</div>
     <div class="product-installments">12x de R$ 7,20 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 5 -->
@@ -965,6 +987,7 @@
     </div>
     <div class="product-price">R$ 95,00</div>
     <div class="product-installments">12x de R$ 9,77 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 6 -->
@@ -980,6 +1003,7 @@
     </div>
     <div class="product-price">R$ 195,00</div>
     <div class="product-installments">12x de R$ 20,06 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 7 -->
@@ -994,6 +1018,7 @@
     </div>
     <div class="product-price">R$ 250,00</div>
     <div class="product-installments">12x de R$ 25,72 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <!-- Produto 8 -->
@@ -1008,6 +1033,7 @@
     </div>
     <div class="product-price">R$ 250,00</div>
     <div class="product-installments">12x de R$ 25,72 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 </div>
 
@@ -1035,6 +1061,7 @@
       <span class="old">R$ 155,00</span>R$ 135,00 <span class="discount">-13%</span>
     </div>
     <div class="product-installments">12x de R$ 13,89 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <div class="product" data-id="vestido-medalha" data-price="180.00" data-name="Vestido Medalha">
@@ -1052,6 +1079,7 @@
       <span class="old">R$ 210,00</span>R$ 180,00 <span class="discount">-14%</span>
     </div>
     <div class="product-installments">12x de R$ 18,52 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <div class="product" data-id="vestido-suely" data-price="178.50" data-name="Vestido Suely">
@@ -1069,6 +1097,7 @@
       <span class="old">R$ 210,00</span>R$ 178,50 <span class="discount">-15%</span>
     </div>
     <div class="product-installments">12x de R$ 18,36 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 
   <div class="product" data-id="vestido-mariah-modal" data-price="120.00" data-name="Vestido Mariah Modal">
@@ -1087,6 +1116,7 @@
       <span class="old">R$ 145,00</span>R$ 120,00 <span class="discount">-17%</span>
     </div>
     <div class="product-installments">12x de R$ 12,34 sem juros</div>
+    <button type="button" class="add-to-cart-btn">Adicionar à sacola</button>
   </div>
 </div>
 
