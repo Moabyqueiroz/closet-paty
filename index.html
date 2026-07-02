@@ -278,6 +278,9 @@
   }
 
   /* BANNERS DE CATEGORIA */
+  #categorias, #destaques {
+    scroll-margin-top: 200px;
+  }
   .category-grid {
     max-width: 1300px;
     margin: 70px auto;
@@ -812,7 +815,7 @@
 <body>
 
 <!-- Barra promocional -->
-<div class="promo-bar">
+<div class="promo-bar" id="topo">
   <div class="promo-track">
     <span>♡ 5% OFF NA SUA PRIMEIRA COMPRA · CUPOM: BEMVINDA5</span>
     <span>♡ FRETE GRÁTIS ACIMA DE R$300</span>
@@ -857,14 +860,14 @@
 
   <nav>
     <ul class="nav-list">
-      <li><a href="#">Início</a></li>
-      <li><a href="#">Acessórios</a></li>
-      <li><a href="#">Looks Completos</a></li>
-      <li><a href="#">Peças de Cima</a></li>
-      <li><a href="#">Peças de Baixo</a></li>
-      <li><a href="#">Sapatos</a></li>
-      <li><a href="#" class="highlight">Nova Coleção</a></li>
-      <li><a href="#">Moda Praia</a></li>
+      <li><a href="#topo">Início</a></li>
+      <li><a href="#categorias">Acessórios</a></li>
+      <li><a href="#categorias">Looks Completos</a></li>
+      <li><a href="#categorias">Peças de Cima</a></li>
+      <li><a href="#categorias">Peças de Baixo</a></li>
+      <li><a href="#categorias">Sapatos</a></li>
+      <li><a href="#destaques" class="highlight">Nova Coleção</a></li>
+      <li><a href="#categorias">Moda Praia</a></li>
     </ul>
   </nav>
 </header>
@@ -905,7 +908,7 @@
 </section>
 
 <!-- Banners de categoria -->
-<div class="category-grid">
+<div class="category-grid" id="categorias">
   <div class="cat-card"><div class="cat-img">Looks Completos</div></div>
   <div class="cat-card"><div class="cat-img">Peças de Cima</div></div>
   <div class="cat-card"><div class="cat-img">Peças de Baixo</div></div>
