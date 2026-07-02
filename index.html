@@ -167,6 +167,41 @@
     font-weight: 500;
   }
 
+  /* BUSCA */
+  .search-bar {
+    display: none;
+    background: var(--cream);
+    border-top: 1px solid var(--line);
+    padding: 16px 30px;
+  }
+  .search-bar.open { display: block; }
+  .search-bar-inner {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+  .search-bar-inner input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    background: var(--bg);
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+  }
+  .search-bar-inner input:focus { border-color: var(--accent); }
+  .search-empty {
+    max-width: 600px;
+    margin: 10px auto 0;
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    display: none;
+  }
+  .search-empty.visible { display: block; }
+
   /* HERO */
   .hero {
     background: linear-gradient(135deg, var(--cream) 0%, var(--rose) 100%);
@@ -641,7 +676,14 @@
     .header-top { grid-template-columns: auto 1fr auto; gap: 12px; padding: 16px 18px; }
     .header-icons-left .label, .header-icons-right .label { display: none; }
     .logo img { height: 60px; }
-    .nav-list { gap: 18px; padding: 12px 18px; }
+    .nav-list {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 18px;
+    }
+    .nav-list.open { display: flex; }
     .nav-list a { font-size: 11px; }
     .hero { padding: 60px 20px; }
     .insta-grid { grid-template-columns: repeat(3, 1fr); }
@@ -830,10 +872,10 @@
 <header>
   <div class="header-top">
     <div class="header-icons-left">
-      <button class="icon-btn" aria-label="Menu">
+      <button class="icon-btn" id="menu-toggle" aria-label="Menu">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
       </button>
-      <button class="icon-btn" aria-label="Buscar">
+      <button class="icon-btn" id="search-toggle" aria-label="Buscar">
         <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z"/></svg>
         <span class="label">BUSCAR</span>
       </button>
@@ -859,7 +901,7 @@
   </div>
 
   <nav>
-    <ul class="nav-list">
+    <ul class="nav-list" id="nav-list">
       <li><a href="#topo">Início</a></li>
       <li><a href="#categorias">Acessórios</a></li>
       <li><a href="#categorias">Looks Completos</a></li>
@@ -870,6 +912,14 @@
       <li><a href="#categorias">Moda Praia</a></li>
     </ul>
   </nav>
+
+  <div id="search-bar" class="search-bar">
+    <div class="search-bar-inner">
+      <input type="text" id="search-input" placeholder="Buscar produtos..." autocomplete="off">
+      <button type="button" id="search-close" class="cart-close" aria-label="Fechar busca">&times;</button>
+    </div>
+    <p id="search-empty" class="search-empty">Nenhum produto encontrado.</p>
+  </div>
 </header>
 
 <!-- Hero -->

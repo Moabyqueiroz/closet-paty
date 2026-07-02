@@ -172,9 +172,64 @@
     const newsletterForm = document.getElementById('newsletter-form');
     if (newsletterForm) newsletterForm.addEventListener('submit', handleNewsletterSubmit);
 
+    const menuToggle = document.getElementById('menu-toggle');
+    const navList = document.getElementById('nav-list');
+    if (menuToggle && navList) {
+      menuToggle.addEventListener('click', () => navList.classList.toggle('open'));
+      navList.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navList.classList.remove('open'));
+      });
+    }
+
+    const searchToggle = document.getElementById('search-toggle');
+    const searchBar = document.getElementById('search-bar');
+    const searchInput = document.getElementById('search-input');
+    const searchClose = document.getElementById('search-close');
+    if (searchToggle && searchBar && searchInput) {
+      searchToggle.addEventListener('click', () => {
+        searchBar.classList.toggle('open');
+        if (searchBar.classList.contains('open')) searchInput.focus();
+        else clearSearch();
+      });
+      searchInput.addEventListener('input', () => filterProducts(searchInput.value));
+      if (searchClose) searchClose.addEventListener('click', () => {
+        searchBar.classList.remove('open');
+        clearSearch();
+      });
+    }
+
     renderCart();
     handleReturnStatus();
   });
+
+  function clearSearch() {
+    const input = document.getElementById('search-input');
+    if (input) input.value = '';
+    filterProducts('');
+  }
+
+  function filterProducts(query) {
+    const q = query.trim().toLowerCase();
+
+    document.querySelectorAll('.products').forEach(grid => {
+      let anyVisible = false;
+      grid.querySelectorAll('.product').forEach(product => {
+        const name = (product.dataset.name || '').toLowerCase();
+        const match = q === '' || name.includes(q);
+        product.style.display = match ? '' : 'none';
+        if (match) anyVisible = true;
+      });
+      const sectionTitle = grid.previousElementSibling;
+      if (sectionTitle && sectionTitle.classList.contains('section-title')) {
+        sectionTitle.style.display = (q === '' || anyVisible) ? '' : 'none';
+      }
+    });
+
+    const anyVisibleTotal = Array.from(document.querySelectorAll('.product'))
+      .some(p => p.style.display !== 'none');
+    const emptyMsg = document.getElementById('search-empty');
+    if (emptyMsg) emptyMsg.classList.toggle('visible', q !== '' && !anyVisibleTotal);
+  }
 
   function handleNewsletterSubmit(e) {
     e.preventDefault();
