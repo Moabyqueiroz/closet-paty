@@ -169,7 +169,34 @@
     const checkoutBtn = document.getElementById('checkout-btn');
     if (checkoutBtn) checkoutBtn.addEventListener('click', checkout);
 
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) newsletterForm.addEventListener('submit', handleNewsletterSubmit);
+
     renderCart();
     handleReturnStatus();
   });
+
+  function handleNewsletterSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn ? btn.textContent : '';
+    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+
+    fetch('/', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: new URLSearchParams(new FormData(form)).toString()
+    })
+      .then(() => {
+        form.reset();
+        showBanner('Obrigada por se inscrever! ♡', 'success');
+      })
+      .catch(() => {
+        showBanner('Não foi possível enviar agora. Tente novamente em instantes.', 'error');
+      })
+      .finally(() => {
+        if (btn) { btn.disabled = false; btn.textContent = originalText; }
+      });
+  }
 })();

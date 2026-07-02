@@ -1139,8 +1139,12 @@
   <div class="newsletter-inner">
     <h2>Seja uma cliente VIP ♡</h2>
     <p>Receba novidades, lançamentos e cupons exclusivos no seu e-mail</p>
-    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Obrigada por se inscrever!');">
-      <input type="email" placeholder="Seu melhor e-mail" required>
+    <form class="newsletter-form" id="newsletter-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+      <input type="hidden" name="form-name" value="newsletter">
+      <p style="position:absolute;left:-9999px;">
+        <label>Não preencha isto: <input name="bot-field"></label>
+      </p>
+      <input type="email" name="email" placeholder="Seu melhor e-mail" required>
       <button type="submit">Cadastrar</button>
     </form>
   </div>
